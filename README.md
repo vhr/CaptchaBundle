@@ -103,6 +103,7 @@ You can define the following type option :
 * **quality**: jpeg quality of captchas (default=15)
 * **charset**: the charset used for code generation (default=abcdefhjkmnprstuvwxyz23456789)
 * **font**: the font to use (default=Generator/Font/captcha.ttf)
+* **font_size**: the font size to use (default=null)
 * **keep_value**: the value will be the same until the form is posted, even if the page is refreshed (default=true)
 * **as_file**: if set to true an image file will be created instead of embedding to please IE6/7 (default=false)
 * **image_folder**: name of folder for captcha images relative to public web folder in case **as_file** ist set to true (default="captcha")

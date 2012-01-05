@@ -84,6 +84,12 @@ class CaptchaType extends AbstractType
     protected $font;
 
     /**
+     * Captcha font size
+     * @var string
+     */
+    protected $fontSize;
+
+    /**
      * Captcha quality
      * @var int
      */
@@ -123,6 +129,7 @@ class CaptchaType extends AbstractType
         $this->gcFreq = $config['gc_freq'];
         $this->expiration = $config['expiration'];
         $this->font = $config['font'];
+        $this->fontSize = $config['font_size'];
         $this->quality = $config['quality'];
     }
 
@@ -143,7 +150,7 @@ class CaptchaType extends AbstractType
             $fingerprint = $this->session->get($this->key.'_fingerprint');
         }
 
-        $generator = new CaptchaGenerator($this->generateCaptchaValue(), $this->imageFolder, $this->webPath, $this->gcFreq, $this->expiration, $this->font, $fingerprint, $this->quality);
+        $generator = new CaptchaGenerator($this->generateCaptchaValue(), $this->imageFolder, $this->webPath, $this->gcFreq, $this->expiration, $this->font, $this->fontSize, $fingerprint, $this->quality);
 
         if ($this->asFile) {
             $view->set('captcha_code', $generator->getFile($this->width, $this->height));

@@ -34,6 +34,12 @@ class CaptchaGenerator {
     public $font;
 
     /**
+     * Captcha Font size
+     * @var string
+     */
+    public $fontSize;
+
+    /**
      * Maximum age of images in minutes
      * @var int
      */
@@ -64,7 +70,7 @@ class CaptchaGenerator {
      */
     public $quality;
 
-    public function __construct($value, $imageFolder, $webPath, $gcFreq, $expiration, $font, $fingerprint, $quality)
+    public function __construct($value, $imageFolder, $webPath, $gcFreq, $expiration, $font, $fontSize, $fingerprint, $quality)
     {
         $this->value = $value;
         $this->imageFolder = $imageFolder;
@@ -72,6 +78,7 @@ class CaptchaGenerator {
         $this->gcFreq = intval($gcFreq);
         $this->expiration = intval($expiration);
         $this->font = $font;
+        $this->fontSize = $fontSize;
         $this->fingerprint = $fingerprint;
         $this->use_fingerprint = (bool)$fingerprint;
         $this->quality = intval($quality);
@@ -171,7 +178,11 @@ class CaptchaGenerator {
         }
 
         // Write CAPTCHA text
-        $size = $width/strlen($this->value);
+        if ( $this->fontSize )
+            $size = $this->fontSize;
+        else
+            $size = $width/strlen($this->value);
+
         $font = $this->font;
         $box = imagettfbbox($size, 0, $font, $this->value);
         $txt_width = $box[2] - $box[0];
